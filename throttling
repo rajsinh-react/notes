@@ -1,0 +1,40 @@
+import React from 'react';
+
+export function App() {
+
+ let count=0
+
+const buttonCLick=()=>{
+ console.log(count++)
+}
+
+const throtting=(func, time) => {
+ let flag =true
+ return function(){
+  let context = this,
+  args = arguments
+
+  if(flag){
+    func.apply(context,args)
+    flag=false
+    console.log(flag)
+    setTimeout(()=>{
+      flag=true
+    },time)
+  }
+ }
+
+}
+
+const  onclick= throtting(buttonCLick,2000)
+  return (
+    <div className='App'>
+      <h1>Hello React.</h1>
+      <h2>Start editing to see some magic happen!</h2>
+      
+      <button onClick = {onclick}>click me</button>
+    </div>
+  );
+}
+
+
